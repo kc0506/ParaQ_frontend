@@ -1,0 +1,52 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+    font-family: 'Lucida';
+    src: url('@/assets/LTYPE/LTYPE.ttf');
+    font-weight: normal;
+}
+
+@font-face {
+    font-family: 'Lucida';
+    src: url('@/assets/LTYPE/LTYPEB.ttf');
+    font-weight: bold;
+}
+
+@font-face {
+    font-family: 'Lucida';
+    src: url('@/assets/LTYPE/LTYPEO.ttf');
+    font-style: italic;
+    font-weight: normal;
+}
+
+@font-face {
+    font-family: 'Lucida';
+    src: url('@/assets/LTYPE/LTYPEBO.ttf');
+    font-style: italic;
+    font-weight: bold;
+}
+
+@font-face {
+    font-family: 'Noto sans';
+    src: url('@/assets/Noto/Noto-Black.otf'), format('opentype');
+    font-weight: bolder;
+    font-display: swap;
+}
+
+* {
+    user-select: none;
+    box-sizing: border-box;
+}
+
+
+html,
+body,
+#root {
+    
+    font-family: 'Lucida';
+    padding: 0;
+    margin: 0;
+    height: 100%;
+}
