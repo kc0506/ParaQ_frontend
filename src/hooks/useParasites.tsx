@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { IParasite, getAllParasites } from "../api";
+import { IParasite, getAllParasites } from "../api/index";
 
 
 type Type = {

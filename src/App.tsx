@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import useParasites from './hooks/useParasites'
 import { IParasite } from './api';
 import useQuiz, { QuizType } from './hooks/useQuiz';
@@ -13,21 +13,30 @@ import Body from './components/Body';
 // 	'pale-orange': 'hsl(33, 100%, 98%)'
 // }
 
-type IFilter = Record<keyof IParasite, boolean>;
+type IFilter = {
+	names: Record<string, boolean>,
+	keys: Record<keyof IParasite, boolean>
+};
+
 
 const initialFilter: IFilter = {
-	"學名": true,
-	"中文名": true,
-	"感染型": true,
-	"寄生部位": true,
-	"I.H.": true,
-	"P.H.": true,
-	"R.H.": true,
-	"F.H.": true,
-	"偶然宿主": true,
-	"檢查方法": true,
-	"治療": true,
+	names: {},
+	keys: {
+		"sientific_name": true,
+		"Chinese_name": true,
+		"infective_form": true,
+		"habitat": true,
+		"I.H.": true,
+		"P.H.": true,
+		"R.H.": true,
+		"F.H.": true,
+		"A.H.": true,
+		"diagnosis": true,
+		"therapy": true
+	}
 }
+
+
 
 function App() {
 
@@ -35,9 +44,21 @@ function App() {
 	const { error, loading, parasites } = useParasites();
 	const { curIndex, total, quiz, nextQuiz } = useQuiz({ filter, parasites });
 
+
+	useEffect(() => {
+		setFilter(prev => {
+			const newFilter = { ...prev };
+			parasites.forEach(parasite => {
+				newFilter.names[parasite.sientific_name] = true;
+			})
+
+			return newFilter;
+		})
+	}, [parasites]);
+
 	return (
 		<>
-			<div className=' h-screen bg-cream flex items-center justify-center'>
+			<div className='flex items-center justify-center h-screen bg-neutral-100'>
 				<Body {...{ filter, setFilter, curIndex, total, nextQuiz, error, loading, quiz }} />
 			</div>
 		</>

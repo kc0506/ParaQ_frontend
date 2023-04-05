@@ -48,22 +48,24 @@ export default function useQuiz(props: IProps): Type {
 
     useEffect(() => {
 
-        console.log('filter updated!')
-
         const newQueue: QuizType[] = [];
         parasites.forEach(parasite => {
+
+            if (!filter.names[parasite.sientific_name])
+                return;
+
             let key: keyof IParasite;
             for (key in parasite) {
-                if (filter[key]) {
-                    if (key == '學名')
+                if (filter.keys[key]) {
+                    if (key === 'sientific_name')
                         newQueue.push({
-                            name: parasite.中文名,
+                            name: parasite.Chinese_name,
                             key,
                             answer: parasite[key],
                         })
                     else
                         newQueue.push({
-                            name: parasite.學名,
+                            name: parasite.sientific_name,
                             key,
                             answer: parasite[key],
                         })
